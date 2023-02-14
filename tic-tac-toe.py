@@ -8,6 +8,11 @@ p1 = []
 p2 = []
 mov = 0
 
+def open_popup():
+   top= Toplevel(root)
+   top.title("Child Window")
+   Label(top, text= "Hello World!", font=('Mistral 18 bold')).place(x=150,y=80)
+
 def SetLayout(id,player_symbol):
     if id==1:
         b1.config(text= player_symbol)
@@ -155,7 +160,6 @@ def Restart():
 
 
 root = Tk()
-
 #adding background image
 #filename = PhotoImage(file="bgg.gif")
 #background_label = Label(root, image=filename)
@@ -216,9 +220,17 @@ b9.grid(row=3, column=2, sticky="snew", ipadx=50,
         ipady=50)
 b9.config(command = lambda : ButtonClick(9))
 
-Button(text="New Game..", font=('Courier new', 22, 'bold'), bg='blue', fg='white',
-            border=5, width=4,command = lambda :Restart()).grid(row=0, column=1, sticky="we")
-            
+Button(text="New Game..", font=('Mistral', 18, 'bold'), bg='pink', fg='black',
+            border=5, width=4,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
+b10 = Button(text= "Open", command= open_popup, font=('Mistral', 18, 'bold'), bg='pink', fg='black',
+            border=5, width=4,)
+b10.grid(row=0, column=2, sticky="snew")
+
+
 root.resizable(0,TRUE)
+
+
+
+
 
 root.mainloop()
