@@ -1,5 +1,6 @@
 from tkinter import Tk,ttk,Button
 from tkinter import messagebox
+from tkinter import *
 from random import randint
 
 ActivePlayer = 1
@@ -154,9 +155,22 @@ def Restart():
 
 
 root = Tk()
+
+#adding background image
+#filename = PhotoImage(file="bgg.gif")
+#background_label = Label(root, image=filename)
+#background_label.place(x=0, y=0, relwidth=1, relheight=1)
+root.configure(bg='#2c041d')
+
 root.title("Tic Tac toe : Player 1")
 st = ttk.Style()
 st.configure("my.TButton", font=('Chiller',24,'bold'))
+
+#Adding styles and colors for the button
+style = ttk.Style()
+style.theme_use('alt')
+style.configure('TButton', background = '#FDFD96', foreground = 'black', width = 20, borderwidth=1, focusthickness=3, focuscolor='none')
+style.map('TButton', background=[('active','#88aed0')])
 
 b1 = ttk.Button(root, text=" ", style="my.TButton")
 b1.grid(row=1, column=0, sticky="nwse", ipadx=50,ipady=50)
@@ -205,6 +219,6 @@ b9.config(command = lambda : ButtonClick(9))
 Button(text="New Game..", font=('Courier new', 22, 'bold'), bg='blue', fg='white',
             border=5, width=4,command = lambda :Restart()).grid(row=0, column=1, sticky="we")
             
-root.resizable(0,0)
+root.resizable(0,TRUE)
 
 root.mainloop()
