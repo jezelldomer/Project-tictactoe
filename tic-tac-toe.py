@@ -9,7 +9,7 @@ p2 = []
 mov = 0
 def open_popup():
    top= Toplevel(root)
-   top.title("Child Window")
+   top.title("Instructions")
    top.geometry("570x580")
    top.resizable(0,0)
    canvas= Canvas(top, width= 1000, height= 750)
@@ -21,9 +21,8 @@ def open_popup():
    canvas.create_text(155, 270, text="\n 3. The player 2 will be the 'O'", fill="black", font=('Monaco 10 '))
    canvas.create_text(279, 300, text="\n 4. The first player to get 3 of her marks in a row (up, down, \n            across, or diagonally) is the winner.", fill="black", font=('Monaco 10 '))
    canvas.create_text(279, 336, text="\n 5. When all 9 squares are full, the game is over. If no player\n          has 3 marks in a row, the game ends in a tie.", fill="black", font=('Monaco 10 '))
-
-def done():
-    quit()
+   btn = Button(top, text='Ready to Play? \n Start the Game!', width=30, height=3, bd='5', command=top.destroy, font=("Mistral 20"), bg="pink")
+   btn.place(x=105, y=400)
 
 
 def SetLayout(id,player_symbol):
@@ -169,15 +168,24 @@ def Restart():
     root.title("Tic Tac Toe : Player 1")
     EnableAll()
 
+def disable_event():
+   pass
+
+
 def Exit():
-    root.destroy()
+    response = messagebox.askquestion("Exit", "Are you sure?")
+    root.protocol("WM_DELETE_WINDOW", disable_event)
+    if response == "yes":
+        quit()
+    else:
+        return None
+
 
 
 root = Tk()
-#adding background image
-#filename = PhotoImage(file="bgg.gif")
-#background_label = Label(root, image=filename)
-#background_label.place(x=0, y=0, relwidth=1, relheight=1)
+root.overrideredirect(True)
+
+
 root.configure(bg='#2c041d')
 
 root.title("Tic Tac toe : Player 1")
