@@ -7,11 +7,24 @@ ActivePlayer = 1
 p1 = []
 p2 = []
 mov = 0
-
 def open_popup():
    top= Toplevel(root)
    top.title("Child Window")
-   Label(top, text= "Hello World!", font=('Mistral 18 bold')).place(x=150,y=80)
+   top.geometry("570x580")
+   top.resizable(0,0)
+   canvas= Canvas(top, width= 1000, height= 750)
+   canvas.pack()   
+
+   canvas.create_text(280, 150, text="INSTRUCTIONS:\n", fill="black", font=('mistral 50 bold'))
+   canvas.create_text(279, 230, text="\n 1. The game is played on a grid that's 3 squares by 3 squares.", fill="black", font=('Monaco 10 '))
+   canvas.create_text(155, 250, text="\n 2. The player 1 will be the 'X'", fill="black", font=('Monaco 10 '))
+   canvas.create_text(155, 270, text="\n 3. The player 2 will be the 'O'", fill="black", font=('Monaco 10 '))
+   canvas.create_text(279, 300, text="\n 4. The first player to get 3 of her marks in a row (up, down, \n            across, or diagonally) is the winner.", fill="black", font=('Monaco 10 '))
+   canvas.create_text(279, 336, text="\n 5. When all 9 squares are full, the game is over. If no player\n          has 3 marks in a row, the game ends in a tie.", fill="black", font=('Monaco 10 '))
+
+def done():
+    quit()
+
 
 def SetLayout(id,player_symbol):
     if id==1:
@@ -156,7 +169,8 @@ def Restart():
     root.title("Tic Tac Toe : Player 1")
     EnableAll()
 
-
+def Exit():
+    root.destroy()
 
 
 root = Tk()
@@ -221,16 +235,15 @@ b9.grid(row=3, column=2, sticky="snew", ipadx=50,
 b9.config(command = lambda : ButtonClick(9))
 
 Button(text="New Game..", font=('Mistral', 18, 'bold'), bg='pink', fg='black',
-            border=5, width=4,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
-b10 = Button(text= "Open", command= open_popup, font=('Mistral', 18, 'bold'), bg='pink', fg='black',
-            border=5, width=4,)
+            border=7, width=4,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
+b10 = Button(text= "Exit", command= Exit, font=('Mistral', 18, 'bold'), bg='pink', fg='black',
+            border=7, width=4,)
 b10.grid(row=0, column=2, sticky="snew")
+b11 = Button(text= "Instructions", command= open_popup, font=('Mistral', 18, 'bold'), bg='pink', fg='blue',
+            border=7, width=4,)
+b11.grid(row=4, column=1, sticky="snew")
 
 
 root.resizable(0,TRUE)
-
-
-
-
 
 root.mainloop()
