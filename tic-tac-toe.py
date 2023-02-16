@@ -108,6 +108,8 @@ def CheckWinner():
         messagebox.showinfo(title="Draw", 
             message="It's a Draw!!")
 
+
+
 def ButtonClick(id):
     global ActivePlayer
     global p1,p2
@@ -186,17 +188,17 @@ root = Tk()
 root.overrideredirect(True)
 
 
-root.configure(bg='#2c041d')
-
+root.configure(bg='#621940')
+#root.geometry("2000x2000")
 root.title("Tic Tac toe : Player 1")
-st = ttk.Style()
-st.configure("my.TButton", font=('Chiller',24,'bold'))
+#st = ttk.Style()
+#st.configure("my.TButton", font=('Chiller',24,'bold'))
 
 #Adding styles and colors for the button
 style = ttk.Style()
 style.theme_use('alt')
-style.configure('TButton', background = '#FDFD96', foreground = 'black', width = 20, borderwidth=1, focusthickness=3, focuscolor='none')
-style.map('TButton', background=[('active','#88aed0')])
+style.configure('my.TButton', background = '#ffb997', foreground = 'black', width = 20, borderwidth=1, focusthickness=3, focuscolor='none', font=("Chiller", 24, "bold"))
+style.map('TButton', background=[('active','#f67e7d')])
 
 b1 = ttk.Button(root, text=" ", style="my.TButton")
 b1.grid(row=1, column=0, sticky="nwse", ipadx=50,ipady=50)
@@ -242,14 +244,15 @@ b9.grid(row=3, column=2, sticky="snew", ipadx=50,
         ipady=50)
 b9.config(command = lambda : ButtonClick(9))
 
-Button(text="New Game..", font=('Mistral', 18, 'bold'), bg='pink', fg='black',
-            border=7, width=4,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
-b10 = Button(text= "Exit", command= Exit, font=('Mistral', 18, 'bold'), bg='pink', fg='black',
-            border=7, width=4,)
+
+Button(text="New Game..", font=('Mistral', 25, 'bold', 'underline'), bg='#de6fa1', fg='white',
+            border=10, width=6,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
+b10 = Button(text= "Exit", command= Exit, font=('Mistral', 25, 'bold', 'underline'), bg='#843b62', fg='white',
+            border=10, width=6,)
 b10.grid(row=0, column=2, sticky="snew")
-b11 = Button(text= "Instructions", command= open_popup, font=('Mistral', 18, 'bold'), bg='pink', fg='blue',
-            border=7, width=4,)
-b11.grid(row=4, column=1, sticky="snew")
+b11 = Button(text= "Instructions", command= open_popup, font=('Courier new', 25, 'bold', 'underline'), bg='#a63a7a', fg='white',
+            border=10, width=6,)
+b11.grid(row=0, column=1, sticky="snew")
 
 
 root.resizable(0,TRUE)
