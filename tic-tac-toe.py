@@ -7,6 +7,8 @@ ActivePlayer = 1
 p1 = []
 p2 = []
 mov = 0
+
+# function for instructions button
 def open_popup():
    top= Toplevel(root)
    top.title("Instructions")
@@ -56,6 +58,7 @@ def SetLayout(id,player_symbol):
 
 from PIL import ImageTk, Image
 
+# functions for winner message
 def message():
     global my_img
     top = Toplevel()   
@@ -127,17 +130,12 @@ def CheckWinner():
 
     if winner ==1:
         message()
-        #messagebox.showinfo(title="Congratulations.", 
-            #message="Player 1 is the winner")
-            
+      
     elif winner ==2:
         message2()
-        #messagebox.showinfo(title="Congratulations.", 
-            #message="Player 2 is the winner")
+
     elif mov ==9:
         message3()
-        #messagebox.showinfo(title="Draw", 
-            #message="It's a Draw!!")
 
 
 def ButtonClick(id):
@@ -149,14 +147,12 @@ def ButtonClick(id):
         SetLayout(id,"X")
         p1.append(id)
         mov +=1
-        root.title("Tic Tac Toe : Player 2")
         ActivePlayer =2
 
     elif(ActivePlayer==2):
         SetLayout(id,"O")
         p2.append(id)
         mov +=1
-        root.title("Tic Tac Toe : Player 1")
         ActivePlayer =1
     CheckWinner()
 
@@ -202,10 +198,11 @@ def Restart():
     mov,ActivePlayer = 0,1
     EnableAll()
 
+# function for disabling the exit button of a window
 def disable_event():
    pass
 
-
+# function for exit button
 def Exit():
     response = messagebox.askquestion("Exit", "Are you sure?")
     root.protocol("WM_DELETE_WINDOW", disable_event)
@@ -219,12 +216,8 @@ def Exit():
 root = Tk()
 root.overrideredirect(True)
 
-
+# adding background color
 root.configure(bg='#621940')
-#root.geometry("2000x2000")
-root.title("Tic Tac toe : Player 1")
-#st = ttk.Style()
-#st.configure("my.TButton", font=('Chiller',24,'bold'))
 
 #Adding styles and colors for the button
 style = ttk.Style()
@@ -232,10 +225,10 @@ style.theme_use('alt')
 style.configure('my.TButton', background = '#ffb997', foreground = 'black', width = 15, borderwidth=1, focusthickness=3, focuscolor='none', font=("Chiller", 33, "bold"))
 style.map('TButton', background=[('active','#f67e7d')])
 
+
 b1 = ttk.Button(root, text=" ", style="my.TButton")
 b1.grid(row=1, column=0, sticky="nwse", ipadx=50,ipady=50)
 b1.config(command = lambda : ButtonClick(1))
-
 
 b2 = ttk.Button(root, text=" ",style ="my.TButton")
 b2.grid(row=1, column=1, sticky="snew", ipadx=50, ipady=50)
@@ -276,15 +269,19 @@ b9.grid(row=3, column=2, sticky="snew", ipadx=50,
         ipady=50)
 b9.config(command = lambda : ButtonClick(9))
 
+
+# adding image for the button
 click_btn= PhotoImage(file='newgame.png')
 click_btn2 = PhotoImage(file='quit.png')
 
-
-#Let us create a label for button event
 img_label= Label(image=click_btn)
 img_label2 = Label(image=click_btn2)
+
+# Modifying the buttons color and structure
 Button(image=click_btn, font=('Mistral', 25, 'bold', 'underline'), bg='#de6fa1', fg='white',
             border=10, width=6,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
+
+# Adding buttons for exit and instructions            
 b10 = Button(image=click_btn2, command= Exit, font=('Mistral', 25, 'bold', 'underline'), bg='#843b62', fg='white',
             border=10, width=6,)
 b10.grid(row=0, column=2, sticky="snew")
