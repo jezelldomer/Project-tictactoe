@@ -54,9 +54,36 @@ def SetLayout(id,player_symbol):
         b9.config(text= player_symbol)
         b9.state(['disabled'])
 
+from PIL import ImageTk, Image
+
+def message():
+    global my_img
+    top = Toplevel()   
+    top.resizable(0,0)
+    top.title("Congratulations!!")
+    my_img = ImageTk.PhotoImage(Image.open("congrats.png"))
+    Label(top, image=my_img).pack()
+
+def message2():
+    global my_img
+    top = Toplevel()
+    top.resizable(0,0)
+    top.title("Congratulations!!")
+    my_img = ImageTk.PhotoImage(Image.open("congrats 2.png"))
+    Label(top, image=my_img).pack()
+
+def message3():
+    global my_img
+    top = Toplevel()
+    top.resizable(0,0)
+    top.title("Draw!!")
+    my_img = ImageTk.PhotoImage(Image.open("draw.png"))
+    Label(top, image=my_img).pack()
+
+
 def CheckWinner():
     global mov 
-    winner = -1
+    winner = 0
 
     if(1 in p1) and (2 in p1) and (3 in p1):
         winner = 1
@@ -99,15 +126,18 @@ def CheckWinner():
         winner = 2
 
     if winner ==1:
-        messagebox.showinfo(title="Congratulations.", 
-            message="Player 1 is the winner")
+        message()
+        #messagebox.showinfo(title="Congratulations.", 
+            #message="Player 1 is the winner")
+            
     elif winner ==2:
-        messagebox.showinfo(title="Congratulations.", 
-            message="Player 2 is the winner")
+        message2()
+        #messagebox.showinfo(title="Congratulations.", 
+            #message="Player 2 is the winner")
     elif mov ==9:
-        messagebox.showinfo(title="Draw", 
-            message="It's a Draw!!")
-
+        message3()
+        #messagebox.showinfo(title="Draw", 
+            #message="It's a Draw!!")
 
 
 def ButtonClick(id):
@@ -130,6 +160,7 @@ def ButtonClick(id):
         ActivePlayer =1
     CheckWinner()
 
+
 def AutoPlay():
     global p1; global p2
     Empty = []
@@ -141,6 +172,8 @@ def AutoPlay():
         ButtonClick(Empty[RandIndex])
     except:
         pass
+
+
 
 def EnableAll():
     b1.config(text= " ")
@@ -167,7 +200,6 @@ def Restart():
     global p1,p2,mov,ActivePlayer
     p1.clear(); p2.clear()
     mov,ActivePlayer = 0,1
-    root.title("Tic Tac Toe : Player 1")
     EnableAll()
 
 def disable_event():
@@ -197,7 +229,7 @@ root.title("Tic Tac toe : Player 1")
 #Adding styles and colors for the button
 style = ttk.Style()
 style.theme_use('alt')
-style.configure('my.TButton', background = '#ffb997', foreground = 'black', width = 20, borderwidth=1, focusthickness=3, focuscolor='none', font=("Chiller", 24, "bold"))
+style.configure('my.TButton', background = '#ffb997', foreground = 'black', width = 15, borderwidth=1, focusthickness=3, focuscolor='none', font=("Chiller", 33, "bold"))
 style.map('TButton', background=[('active','#f67e7d')])
 
 b1 = ttk.Button(root, text=" ", style="my.TButton")
@@ -244,17 +276,21 @@ b9.grid(row=3, column=2, sticky="snew", ipadx=50,
         ipady=50)
 b9.config(command = lambda : ButtonClick(9))
 
+click_btn= PhotoImage(file='newgame.png')
+click_btn2 = PhotoImage(file='quit.png')
 
-Button(text="New Game..", font=('Mistral', 25, 'bold', 'underline'), bg='#de6fa1', fg='white',
+
+#Let us create a label for button event
+img_label= Label(image=click_btn)
+img_label2 = Label(image=click_btn2)
+Button(image=click_btn, font=('Mistral', 25, 'bold', 'underline'), bg='#de6fa1', fg='white',
             border=10, width=6,command = lambda :Restart()).grid(row=0, column=0, sticky="we")
-b10 = Button(text= "Exit", command= Exit, font=('Mistral', 25, 'bold', 'underline'), bg='#843b62', fg='white',
+b10 = Button(image=click_btn2, command= Exit, font=('Mistral', 25, 'bold', 'underline'), bg='#843b62', fg='white',
             border=10, width=6,)
 b10.grid(row=0, column=2, sticky="snew")
-b11 = Button(text= "Instructions", command= open_popup, font=('Courier new', 25, 'bold', 'underline'), bg='#a63a7a', fg='white',
+b11 = Button(text= "Instructions", command= open_popup, font=('Mistral', 25, 'bold', 'underline'), bg='#a63a7a', fg='white',
             border=10, width=6,)
 b11.grid(row=0, column=1, sticky="snew")
 
-
-root.resizable(0,TRUE)
 
 root.mainloop()
